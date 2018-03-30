@@ -1,6 +1,14 @@
-import { CLICK_UPDATE_VALUE } from '../actions/types';
+import {BASIC_INFO_FETCH, BASIC_INFO_FETCHED} from './types';
+import fetchBasicInfoAPI from '../../api/fetchBasicInfoAPI';
 
-export const clickButton = value => ({
-    type: CLICK_UPDATE_VALUE,
-    newValue: value
-});
+export function fetchBasicInfo() {
+    return (dispatch) => {
+        dispatch({ type: BASIC_INFO_FETCH });
+        fetchBasicInfoAPI().then((data) => {
+            dispatch({
+                type: BASIC_INFO_FETCHED,
+                data
+            });
+        });
+    }
+};

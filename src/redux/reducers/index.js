@@ -1,6 +1,6 @@
-import { clickReducer } from './clickReducer';
+import { basicInfo } from './basicInfo';
 import { combineReducers } from 'redux';
 
 export const Reducers = combineReducers({
-    clickState: clickReducer
+    basicInfo: basicInfo
 });

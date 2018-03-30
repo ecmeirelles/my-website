@@ -1,46 +1,43 @@
 import React, { Component } from 'react';
-
-import './app.css';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { clickButton } from './redux/actions';
+import {fetchBasicInfo} from "./redux/actions";
+import './app.css';
 
 class App extends Component {
-    state = {
-        inputValue: ''
-    };
-
-    _inputChange = (event) => {
-        this.setState({
-            inputValue: event.target.value
-        });
-    };
+    componentDidMount() {
+        const { fetchBasicInfoD } = this.props;
+        fetchBasicInfoD();
+    }
 
     render() {
-        const {
-            newValue,
-            clickButton
-        } = this.props;
+        const { basicInfo } = this.props;
+        if (basicInfo === undefined) {
+            return (
+                <div className="app" style={{ paddingTop: '10px' }}>
+                    <p>Loading...</p>
+                </div>
+            )
+        }
         return (
             <div className="app" style={{ paddingTop: '10px' }}>
-                <input
-                    onChange={this._inputChange}
-                    type='text'
-                    value={this.state.inputValue}
-                />
-                <button onClick={() => clickButton(this.state.inputValue)}>
-                    Click me!
-                </button>
-                <h1>{ newValue }</h1>
+                <p>{ basicInfo.name }</p>
             </div>
         );
     }
 }
 
-const mapStateToProps = (store) => ({
+/*const mapStateToProps = (store) => ({
     newValue: store.clickState.newValue
 });
 const mapDispatchToProps = (dispatch) => (
     bindActionCreators({ clickButton }, dispatch)
 );
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);*/
+export default connect(
+    (state) => ({
+        basicInfo: state.basicInfo.basicInfo
+    }),
+    (dispatch) => ({
+        fetchBasicInfoD: () => dispatch(fetchBasicInfo())
+    })
+)(App);
