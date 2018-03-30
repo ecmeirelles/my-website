@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {fetchBasicInfo} from "./redux/actions";
-import './app.css';
+import {fetchBasicInfo} from './redux/actions';
 
 class App extends Component {
     componentDidMount() {
@@ -13,26 +12,19 @@ class App extends Component {
         const { basicInfo } = this.props;
         if (basicInfo === undefined) {
             return (
-                <div className="app" style={{ paddingTop: '10px' }}>
+                <div style={{ textAlign: 'center', paddingTop: 10 }}>
                     <p>Loading...</p>
                 </div>
             )
         }
         return (
-            <div className="app" style={{ paddingTop: '10px' }}>
+            <div style={{ textAlign: 'center', paddingTop: 10 }}>
                 <p>{ basicInfo.name }</p>
             </div>
         );
     }
 }
 
-/*const mapStateToProps = (store) => ({
-    newValue: store.clickState.newValue
-});
-const mapDispatchToProps = (dispatch) => (
-    bindActionCreators({ clickButton }, dispatch)
-);
-export default connect(mapStateToProps, mapDispatchToProps)(App);*/
 export default connect(
     (state) => ({
         basicInfo: state.basicInfo.basicInfo

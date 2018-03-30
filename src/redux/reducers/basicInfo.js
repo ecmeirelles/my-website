@@ -1,4 +1,4 @@
-import {BASIC_INFO_FETCHED} from "../actions/types";
+import {BASIC_INFO_FETCHED} from '../actions/types';
 
 export const basicInfo = (state = {}, action) => {
     switch (action.type) {
